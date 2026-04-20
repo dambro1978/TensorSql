@@ -205,3 +205,6 @@ INSERT INTO tensor_B (j, k, value) VALUES
 -- Esecuzione esempio:
 -- CALL tensor_contract();
 -- SELECT * FROM tensor_C;
+
+
+---Created by Giuseppe D'Ambrosio
