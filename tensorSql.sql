@@ -1,6 +1,6 @@
 -- TensorSQL Engine
 -- Versione migliorata e normalizzata
--- Created by Giuseppe D'Ambrosio
+-- Creata da Giuseppe D'Ambrosio
 -- ========================================
 -- 1. Pulizia schema
 -- ========================================
@@ -21,14 +21,20 @@ CREATE TABLE tensor_A (
     i INT NOT NULL,
     j INT NOT NULL,
     value DOUBLE NOT NULL,
-    PRIMARY KEY (i, j)
+
+    PRIMARY KEY (i, j),
+    INDEX idx_tensor_A_j (j),
+    INDEX idx_tensor_A_i (i)
 );
 
 CREATE TABLE tensor_B (
     j INT NOT NULL,
     k INT NOT NULL,
     value DOUBLE NOT NULL,
-    PRIMARY KEY (j, k)
+
+    PRIMARY KEY (j, k),
+    INDEX idx_tensor_B_j (j),
+    INDEX idx_tensor_B_k (k)
 );
 
 
@@ -41,7 +47,9 @@ CREATE TABLE symmetric_tensor (
     i INT NOT NULL,
     j INT NOT NULL,
     value DOUBLE NOT NULL,
+
     PRIMARY KEY (i, j),
+    INDEX idx_symmetric_lookup (j, i),
     CHECK (i <= j)
 );
 
@@ -107,6 +115,9 @@ BEGIN
     GROUP BY
         A.i,
         B.k;
+
+    CREATE INDEX idx_tensor_C_ik
+    ON tensor_C (i, k);
 END //
 
 
@@ -164,6 +175,9 @@ BEGIN
     GROUP BY
         i,
         j;
+
+    CREATE INDEX idx_tensor_sum_ij
+    ON tensor_sum (i, j);
 END //
 
 
