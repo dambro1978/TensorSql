@@ -1,1 +1,1 @@
-This SQL functions defines tensor operations including creation of tensor tables, functions, and procedures for tensor contraction and product.
+DEMO VERSION. This SQL functions defines tensor operations including creation of tensor tables, functions, and procedures for tensor contraction and product.
